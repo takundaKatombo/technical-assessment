@@ -21,4 +21,3 @@ class Message:
         # Assuming source is a Firestore document
         return Message(source.get('text'), source.get('user_id'), source.get('timestamp'))
 
-    # Add methods to interact with Firestore if needed

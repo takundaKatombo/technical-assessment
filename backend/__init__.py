@@ -11,4 +11,5 @@ def create_app():
     app.register_blueprint(groups_blueprint, url_prefix='/group')
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
     app.register_blueprint(chat_blueprint, url_prefix='/chat')
+    app.register_blueprint(submit-interests, url_prefix='/submit-interests')
     return app

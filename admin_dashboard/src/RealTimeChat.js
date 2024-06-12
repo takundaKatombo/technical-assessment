@@ -1,6 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import firebase from 'firebase/app';
+import 'firebase/messaging';
+
+
+
+// Request permission to receive notifications
+const messaging = firebase.messaging();
+messaging.requestPermission()
+  .then(function () {
+    console.log('Notification permission granted.');
+    // Get the token in your client app
+    return messaging.getToken();
+  })
+  .then(function (token) {
+    console.log('Token obtained:', token);
+    // Send the token to your server to send notifications later
+  })
+  .catch(function (err) {
+    console.log('Unable to get permission to notify.', err);
+  });
 
 const RealTimeChat = ({ groupId }) => {
   const [messages, setMessages] = useState([]);

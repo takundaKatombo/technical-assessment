@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, Blueprint
 from firebase_admin import firestore, credentials, initialize_app
 import os
+from firebase_admin import messaging
+
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 cred_path = os.path.join(current_dir, '..', 'keys', 'technical-assessment-d3ea8-firebase-adminsdk-elk7v-5650612bf7.json')
@@ -25,3 +27,19 @@ def register_user():
         return jsonify({"id": user_ref.id}), 201
     except Exception as e:
         return f"An Error Occurred: {e}", 500
+
+
+def send_to_firebase_cloud_messaging(token, title, body):
+    # See documentation on defining a message payload
+    message = messaging.Message(
+        notification=messaging.Notification(
+            title=title,
+            body=body,
+        ),
+        token=token,
+    )
+
+    # Send a message to the device corresponding to the provided registration token
+    response = messaging.send(message)
+    # Response is a message ID string
+    print('Successfully sent message:', response)

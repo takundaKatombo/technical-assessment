@@ -1,7 +1,5 @@
-# Example: Admin model (if applicable)
 class Admin:
     def __init__(self, username, email):
         self.username = username
         self.email = email
 
-    # Add methods for admin operations
