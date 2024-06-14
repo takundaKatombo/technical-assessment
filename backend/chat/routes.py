@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from backend.chat.models import Message
+from chat.models import Message
 from firebase_admin import firestore
 from firebase_admin import messaging
 

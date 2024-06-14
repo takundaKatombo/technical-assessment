@@ -24,9 +24,16 @@ def register_user():
         # Add a new user to Firestore
         user_ref = db.collection('users').document()
         user_ref.set(data)
-        return jsonify({"id": user_ref.id}), 201
+        
+        response = jsonify({"id": user_ref.id})
+        response.status_code = 201
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     except Exception as e:
-        return f"An Error Occurred: {e}", 500
+        response = jsonify({"error": f"An Error Occurred: {e}"})
+        response.status_code = 500
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 
 def send_to_firebase_cloud_messaging(token, title, body):
