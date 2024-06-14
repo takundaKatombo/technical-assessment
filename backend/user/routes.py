@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, Blueprint
 from firebase_admin import firestore, credentials, initialize_app
 import os
 from firebase_admin import messaging
-
+from flask_cors import CORS
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 cred_path = os.path.join(current_dir, '..', 'keys', 'technical-assessment-d3ea8-firebase-adminsdk-elk7v-5650612bf7.json')
@@ -18,6 +18,7 @@ db = firestore.client()
 user_blueprint = Blueprint('user', __name__)
 
 @user_blueprint.route('/register', methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def register_user():
     try:
         data = request.get_json()
