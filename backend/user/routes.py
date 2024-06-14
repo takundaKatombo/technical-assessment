@@ -2,7 +2,8 @@ from flask import Flask, request, jsonify, Blueprint
 from firebase_admin import firestore, credentials, initialize_app
 import os
 from firebase_admin import messaging
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 cred_path = os.path.join(current_dir, '..', 'keys', 'technical-assessment-d3ea8-firebase-adminsdk-elk7v-5650612bf7.json')
@@ -28,12 +29,12 @@ def register_user():
         
         response = jsonify({"id": user_ref.id})
         response.status_code = 201
-        response.headers.add('Access-Control-Allow-Origin', '*')
+        # response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     except Exception as e:
         response = jsonify({"error": f"An Error Occurred: {e}"})
         response.status_code = 500
-        response.headers.add('Access-Control-Allow-Origin', '*')
+        # response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 

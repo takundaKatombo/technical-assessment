@@ -12,7 +12,12 @@ const UserList = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('/admin/dashboard');
+            const response = await axios({
+                method: 'get',
+                url: 'http://127.0.0.1:8080/admin/dashboard',
+                data: JSON.stringify(formObject), // Convert the object to a JSON string
+                headers: { 'Content-Type': 'application/json' } // Set the content type to application/json
+            });
             setUsers(response.data);
         } catch (error) {
             console.error(error);
